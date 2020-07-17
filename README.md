@@ -1,10 +1,10 @@
 ## API Integration Store
 
 API integrasi ini di gunakan untuk membuat koneksi data dari POS ke Master Database Store yang akan di gunakan untuk :
-    1. View Aplikasi Packer
-    2. View Aplikasi Customer
-    3. View Aplikasi Taking Order
-    4. Pengiriman data ke HokBen Cloud API
+    - View Aplikasi Packer
+    - View Aplikasi Customer
+    - View Aplikasi Taking Order
+    - Pengiriman data ke HokBen Cloud API
 
 ### Documentation
 
