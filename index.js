@@ -1,25 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const mysql = require('mysql');
 const { response } = require('express');
+const connection  =  require('./connection');
  
 // parse application/json
 app.use(bodyParser.json());
  
-//create database connection
-const conn = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'tahu1',
-  database: 'HBDB_StoreIntServer'
-});
- 
-//connect to database
-conn.connect((err) =>{
-  if(err) throw err;
-  console.log('Mysql Connected...');
-});
+
  
 //tampilkan semua data product
 app.get('/api/transaction',(req, res) => {
@@ -43,11 +31,16 @@ app.get('/api/transaction_detail/:id',(req, res) => {
     let query = conn.query(sql, (err, results) => {
       if(err) throw err;
       res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
-    });
+    }); 
   });
 
 //Tambahkan data product baru
+const senddata = require('./send_data')
+app.post('/api/transaction_add', senddata.add_transaction);
+
+/*
 app.post('/api/transaction_add',(req, res) => {
+    
     var responseinsert;
     var dateFormat = require('dateformat');
     var dateNow=dateFormat(new Date(), "yyyy-mm-dd H:MM:ss");
@@ -63,7 +56,7 @@ app.post('/api/transaction_add',(req, res) => {
     };  
 
     let sql = "INSERT INTO HBDB_orderhdr SET ?";
-    let query = conn.query(sql, dataheader,(err, results) => {
+    let query = connection.query(sql, dataheader,(err, results) => {
       if(err) throw err;
      // res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
     });
@@ -71,8 +64,6 @@ app.post('/api/transaction_add',(req, res) => {
     var objectvar   =  req.body.order_detail;
     var datadetail = "";
     for(var attributename in objectvar){
-        /*console.log(req.body.transid);
-        console.log(attributename+": "+objectvar[attributename]);*/
       
         var detailprod  = objectvar[attributename];
         var pcsdetail   = detailprod.split("|");
@@ -85,7 +76,7 @@ app.post('/api/transaction_add',(req, res) => {
             type: pcsdetail[0]
         };  
         let sqldetail = "INSERT INTO HBDB_orderdtl SET ?";
-        let querydetail = conn.query(sqldetail, datadetail,(err, resultsdetail) => {
+        let querydetail = connection.query(sqldetail, datadetail,(err, resultsdetail) => {
            if(err) throw err;
            responseinsert = resultsdetail;
           //console.log(resultsdetail);
@@ -95,6 +86,7 @@ app.post('/api/transaction_add',(req, res) => {
 
     res.send(JSON.stringify({"status": 200, "error": null, "response": responseinsert}));
   });
+  */
 //Server listening
 app.listen(3000,() =>{
   console.log('Server started on port 3000...');

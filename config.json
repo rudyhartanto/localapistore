@@ -1,0 +1,13 @@
+{
+    "app_title": "Hokben Push Data POS",
+    "prefix_path": "/api/v1/",
+    "port": 6970,
+    "database" : {
+      "host": "localhost",
+      "port": 3306,
+      "database": "HBDB_StoreIntServer",
+      "user": "root",
+      "password": "tahu1",
+      "logging": true
+    }
+}
