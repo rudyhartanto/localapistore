@@ -17,11 +17,10 @@ API integrasi ini di gunakan untuk membuat koneksi data dari POS ke Master Datab
 ### Reqruitment Installation
 
 - Node JS
-- GIT
-- NPM
-- Sequalize
-- Map for Array
 
 #### How To Install
  
-   
+    - Create Folder C:\apiserver
+    - Download file github dan extract ke C:\apiserver
+    - copy runserver.vbs ke start up windows
+    - Restart 
