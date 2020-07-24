@@ -19,8 +19,9 @@ API integrasi ini di gunakan untuk membuat koneksi data dari POS ke Master Datab
 - Node JS
 
 #### How To Install
- 
+    - Download and Restore apiserver_db.sql
     - Create Folder C:\apiserver
     - Download file github dan extract ke C:\apiserver
+    - Change config.json rule database with current database apiserver_db has been Restored
     - copy runserver.vbs ke start up windows
     - Restart 
