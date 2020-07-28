@@ -22,6 +22,31 @@ app.use(bodyParser.json());
                 var dateFormat = require('dateformat');
                 var dateNow=dateFormat(new Date(), "yyyy-mm-dd H:MM:ss");
 
+                //deleteData
+                query.destroy({
+                    where: {
+                        transid: req.body.transid //this will be your id that you want to delete
+                    }
+                 }).then(function(rowDeleted){ // rowDeleted will return number of rows deleted
+                   if(rowDeleted === 1){
+                      console.log('Deleted successfully');
+                    }
+                 }, function(err){
+                     console.log(err); 
+                 });
+
+                 queryHDR.destroy({
+                    where: {
+                        transid: req.body.transid //this will be your id that you want to delete
+                    }
+                 }).then(function(rowDeleted){ // rowDeleted will return number of rows deleted
+                   if(rowDeleted === 1){
+                      console.log('Deleted successfully');
+                    }
+                 }, function(err){
+                     console.log(err); 
+                 });
+
                 query.sequelize.transaction({ isolationLevel: Sequelize.Transaction.ISOLATION_LEVELS.READ_UNCOMMITTED }, (t) => { 
                     return queryHDR.create({
                         transid: req.body.transid, 
