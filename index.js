@@ -29,7 +29,10 @@ app.disable('etag');
 app.get('/api/getAllTransaction/:offset(\\d+)/:limit(\\d+)', function(req, res) {
   const vw_kitchendisplay = require('./model/vw_kitchendisplay');
   vw_kitchendisplay.findAll({
-    offset: parseInt(req.params.offset), limit: parseInt(req.params.limit)
+    offset: parseInt(req.params.offset), limit: parseInt(req.params.limit),
+    order: [
+        ['transid', 'ASC']
+    ]
   }).then(function (vw_kitchendisplay) {
     res.send(JSON.stringify({"status": 200, "error": null, "response": vw_kitchendisplay}));
   })

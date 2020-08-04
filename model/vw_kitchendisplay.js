@@ -6,6 +6,10 @@ const HBDB_orderdtl = sequelize.define('vw_kitchendisplay', {
         type: Sequelize.STRING,
         primaryKey: true
     },
+    id: {
+        type: Sequelize.STRING,
+        primaryKey: true
+    },
     prodcode: Sequelize.STRING,
     prodname: Sequelize.STRING,
     qty: Sequelize.STRING,
