@@ -16,4 +16,4 @@ const HBDB_orderdtl = sequelize.define('vw_kitchendisplay', {
     layanan: Sequelize.STRING
 }, { timestamps: false, freezeTableName: true });
 
-module.exports = HBDB_orderdtl
+module.exports = vw_kitchendisplay

@@ -36,7 +36,6 @@ app.get('/api/getAllTransaction/:offset(\\d+)/:limit(\\d+)', function(req, res) 
   }).then(function (vw_kitchendisplay) {
     res.send(JSON.stringify({"status": 200, "error": null, "response": vw_kitchendisplay}));
   })
-  
 });
 //tampilkan data header berdasarkan id
 app.get('/api/transaction_header/:id',(req, res) => {
@@ -54,7 +53,21 @@ app.get('/api/transaction_detail/:id',(req, res) => {
       res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
     }); 
   });
-
+  
+  app.get('/api/update_transaction_detail/:id/:status',(req, res) => {
+    const HBDB_orderdtl = require('./model/HBDB_orderdtl');
+    HBDB_orderdtl.update(
+        { status: req.params.status }, //what going to be updated
+        { where: { id: req.params.id }} // where clause
+    )
+    .then(result => {
+      res.send(JSON.stringify({"status": 200, "error": null, "response": result}));
+    })
+    .catch(error => {
+      res.send(JSON.stringify({"status": 400, "error": null, "response": error}));
+    })
+          
+  });
 //Tambahkan data product baru
 const senddata = require('./send_data')
 app.post('/api/transaction_add', senddata.add_transaction);

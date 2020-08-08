@@ -3,6 +3,10 @@ const sequelize = global.sequelize_HBDB;
 
 const HBDB_orderdtl = sequelize.define('HBDB_orderdtl', {
     transid: {
+        type: Sequelize.INTEGER,
+        primaryKey: true
+    },
+    transid: {
         type: Sequelize.STRING,
         primaryKey: true
     },
@@ -10,7 +14,8 @@ const HBDB_orderdtl = sequelize.define('HBDB_orderdtl', {
     prodname: Sequelize.STRING,
     qty: Sequelize.INTEGER,
     price: Sequelize.DECIMAL,
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    status: Sequelize.STRING
 }, { timestamps: false, freezeTableName: true });
 
 module.exports = HBDB_orderdtl
