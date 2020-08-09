@@ -58,11 +58,11 @@ app.get('/api/transaction_detail/:id',(req, res) => {
     console.log(requpdate.params);
     const HBDB_orderdtl = require('./model/HBDB_orderdtl');
     HBDB_orderdtl.update(
-        { status: requpdate.params.status }, //what going to be updated
-        { where: { id: requpdate.params.id }} // where clause
+        { status: requpdate.params.statusupdate }, //what going to be updated
+        { where: { id: requpdate.params.iddata }} // where clause
     )
     .then(result => {
-      resupdate.send(JSON.stringify({"status": 200, "error": null, "response": requpdate.params.status +'=='+requpdate.params.id}));
+      resupdate.send(JSON.stringify({"status": 200, "error": null, "response": requpdate.params.statusupdate +'=='+requpdate.params.iddata}));
     })
     .catch(error => {
       resupdate.send(JSON.stringify({"status": 400, "error": null, "response": error}));
