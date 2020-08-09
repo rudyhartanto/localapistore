@@ -54,20 +54,23 @@ app.get('/api/transaction_detail/:id',(req, res) => {
     }); 
   });
   
-  app.get('/api/update_transaction_detail/:id/:status',(req, res) => {
+  app.get('/api/update_transaction_detail/:iddata(\\d+)/:statusupdate(\\d+)',(requpdate, resupdate) => {
+    console.log(requpdate.params);
     const HBDB_orderdtl = require('./model/HBDB_orderdtl');
     HBDB_orderdtl.update(
-        { status: req.params.status }, //what going to be updated
-        { where: { id: req.params.id }} // where clause
+        { status: requpdate.params.status }, //what going to be updated
+        { where: { id: requpdate.params.id }} // where clause
     )
     .then(result => {
-      res.send(JSON.stringify({"status": 200, "error": null, "response": result}));
+      resupdate.send(JSON.stringify({"status": 200, "error": null, "response": requpdate.params.status +'=='+requpdate.params.id}));
     })
     .catch(error => {
-      res.send(JSON.stringify({"status": 400, "error": null, "response": error}));
+      resupdate.send(JSON.stringify({"status": 400, "error": null, "response": error}));
     })
           
   });
+
+  
 //Tambahkan data product baru
 const senddata = require('./send_data')
 app.post('/api/transaction_add', senddata.add_transaction);
