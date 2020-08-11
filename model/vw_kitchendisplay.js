@@ -14,7 +14,8 @@ const vw_kitchendisplay = sequelize.define('vw_kitchendisplay', {
     prodname: Sequelize.STRING,
     qty: Sequelize.STRING,
     layanan: Sequelize.STRING,
-    status: Sequelize.INTEGER
+    status: Sequelize.INTEGER,
+    entrydate: Sequelize.DATE
 }, { timestamps: false, freezeTableName: true });
 
 module.exports = vw_kitchendisplay

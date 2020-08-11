@@ -12,7 +12,10 @@ const drive_sales_hdr = sequelize.define('HBDB_orderhdr', {
     posid: Sequelize.STRING,
     device: Sequelize.STRING,
     status: Sequelize.INTEGER,
-    entrydate: Sequelize.DATE    
+    entrydate: Sequelize.DATE ,
+    finish_packingdate: Sequelize.DATE  ,
+    finish_deliverydate: Sequelize.DATE  ,
+    void_date : Sequelize.DATE 
 }, { timestamps: false, freezeTableName: true });
 
 module.exports = drive_sales_hdr

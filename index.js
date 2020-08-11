@@ -55,14 +55,44 @@ app.get('/api/transaction_detail/:id',(req, res) => {
   });
   
   app.get('/api/update_transaction_detail/:iddata(\\d+)/:statusupdate(\\d+)',(requpdate, resupdate) => {
-    console.log(requpdate.params);
+    var dateFormat = require('dateformat');
+    var dateNow=dateFormat(new Date(), "yyyy-mm-dd H:MM:ss");
+
     const HBDB_orderdtl = require('./model/HBDB_orderdtl');
     HBDB_orderdtl.update(
-        { status: requpdate.params.statusupdate }, //what going to be updated
+        { status: requpdate.params.statusupdate,
+        finish_date : dateNow }, //what going to be updated
         { where: { id: requpdate.params.iddata }} // where clause
     )
     .then(result => {
       resupdate.send(JSON.stringify({"status": 200, "error": null, "response": requpdate.params.statusupdate +'=='+requpdate.params.iddata}));
+    })
+    .catch(error => {
+      resupdate.send(JSON.stringify({"status": 400, "error": null, "response": error}));
+    })
+          
+  });
+
+  app.get('/api/update_transaction_header/:transid/:headerStatus(\\d+)',(requpdate, resupdate) => {
+    var dateFormat = require('dateformat');
+    var dateNow=dateFormat(new Date(), "yyyy-mm-dd H:MM:ss");
+
+    const HBDB_orderdtl = require('./model/HBDB_orderhdr');
+    var fieldUpdate = new Array();
+    if(requpdate.params.headerStatus == 1){
+      fieldUpdate = { "status" : requpdate.params.headerStatus, "finish_packingdate" : dateNow };
+    }else if(requpdate.params.headerStatus == 2){
+      fieldUpdate = { "status" : requpdate.params.headerStatus, "finish_deliverydate" : dateNow };
+    }else{
+      fieldUpdate = { "status" : requpdate.params.headerStatus, "void_date" : dateNow };
+    }
+    console.log(fieldUpdate);
+    HBDB_orderdtl.update(
+        fieldUpdate, //what going to be updated
+        { where: { transid: requpdate.params.transid }} // where clause
+    )
+    .then(result => {
+      resupdate.send(JSON.stringify({"status": 200, "error": null, "response": requpdate.params.headerStatus +'=='+requpdate.params.transid}));
     })
     .catch(error => {
       resupdate.send(JSON.stringify({"status": 400, "error": null, "response": error}));

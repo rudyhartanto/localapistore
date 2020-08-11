@@ -15,7 +15,8 @@ const HBDB_orderdtl = sequelize.define('HBDB_orderdtl', {
     qty: Sequelize.INTEGER,
     price: Sequelize.DECIMAL,
     type: Sequelize.STRING,
-    status: Sequelize.STRING
+    status: Sequelize.STRING,
+    finish_date : Sequelize.DATE
 }, { timestamps: false, freezeTableName: true });
 
 module.exports = HBDB_orderdtl
